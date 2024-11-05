@@ -43,7 +43,7 @@ const CaptureImage = ({ userInfo }) => {
         formData.append('department', userInfo.department);
 
         try {
-            const res = await axios.post('http://localhost:8000/api/upload', formData, {
+            const res = await axios.post('https://mainproject-glmp.onrender.com/api/upload', formData, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'multipart/form-data',

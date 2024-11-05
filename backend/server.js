@@ -14,7 +14,7 @@ const __dirname = path.resolve();
 
 // Middleware
 app.use(cors({
-    origin: 'http://localhost:5173', // Adjust to your frontend URL
+    origin: 'https://mainproject-glmp.onrender.com', // Adjust to your frontend URL
     credentials: true // Allow cookies to be sent
 }));
 app.use(express.json()); // Parse JSON bodies
