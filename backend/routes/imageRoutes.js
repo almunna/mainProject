@@ -7,6 +7,7 @@ import getEmployeeModel from '../utils/getEmployeeModel.js';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp'; // Ensure sharp is imported
+import sanitize from 'sanitize-filename';
 
 dotenv.config();
 
@@ -19,14 +20,12 @@ const __dirname = dirname(__filename);
 // Set up multer storage for image uploads with department-based folder structure
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const department = req.session.department;
-        console.log("Session Department:", department); // Log department from session
-
-        if (!department) {
+        if (!req.session || !req.session.department) {
             return cb(new Error('Department is missing from session'));
         }
 
-        const dir = path.join('uploads', department);
+        const department = sanitize(req.session.department);
+        const dir = path.resolve(__dirname, '../uploads', department);
 
         // Attempt to create the directory if it doesn't exist
         try {
@@ -45,13 +44,21 @@ const storage = multer.diskStorage({
     },
 });
 
-const upload = multer({ storage });
+const upload = multer({
+    storage,
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only image files are allowed!'));
+        }
+    },
+    limits: { fileSize: 5 * 1024 * 1024 }, // Limit file size to 5MB
+});
 
 // Middleware to check session for registration data
 const ensureRegistrationData = (req, res, next) => {
-    const { name, email, department } = req.session;
-    console.log("Session Data:", req.session); // Log the full session data
-
+    const { name, email, department } = req.session || {};
     if (!name || !email || !department) {
         return res.status(400).json({ error: 'Please register before uploading images.' });
     }
@@ -60,9 +67,7 @@ const ensureRegistrationData = (req, res, next) => {
 
 // Route to store registration data in session
 router.post('/register', (req, res) => {
-    console.log('Incoming registration data:', req.body); // Log the incoming data
     const { name, email, department } = req.body;
-
     if (!name || !email || !department) {
         return res.status(400).json({ error: 'All fields (name, email, department) are required' });
     }
@@ -78,8 +83,8 @@ router.post('/register', (req, res) => {
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: process.env.EMAIL_USER, // your email address
-        pass: process.env.EMAIL_PASS, // your app-specific password
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
     },
 });
 
@@ -93,7 +98,7 @@ const sendEmail = (to, subject, text, imagePath) => {
         attachments: [
             {
                 filename: 'captured_image.png',
-                path: imagePath, // path to the image file
+                path: imagePath,
             },
         ],
     };
@@ -103,22 +108,28 @@ const sendEmail = (to, subject, text, imagePath) => {
 
 // Upload route, protected by session middleware
 router.post('/upload', ensureRegistrationData, upload.single('image'), async (req, res) => {
-    console.log('Received files:', req.file); // Log received files
-
     if (!req.file) {
         return res.status(400).json({ error: 'No image file uploaded' });
     }
 
     try {
         const EmployeeModel = getEmployeeModel(req.session.department);
-        const imagePath = req.file.path; // Uploaded image path
+        
+        // Optimize image using sharp
+        const optimizedImagePath = path.join('uploads', req.session.department, `optimized-${req.file.filename}`);
+        await sharp(req.file.path)
+            .resize({ width: 800 })
+            .toFile(optimizedImagePath);
 
-        // Create a new employee record with additional information
+        // Update imagePath to use optimized image
+        const imagePath = optimizedImagePath;
+
+        // Create a new employee record
         const newEmployee = new EmployeeModel({
-            name: req.session.name, // Get name from the session
-            email: req.session.email, // Get email from the session
-            department: req.session.department, // Get department from the session
-            imagePath: imagePath, // Save uploaded image path
+            name: req.session.name,
+            email: req.session.email,
+            department: req.session.department,
+            imagePath,
         });
 
         const savedEmployee = await newEmployee.save();
@@ -126,7 +137,7 @@ router.post('/upload', ensureRegistrationData, upload.single('image'), async (re
         // Send email after image upload
         const emailSubject = 'Your Captured Image';
         const emailText = `Hi ${req.session.name},\n\nThank you for using the Virtual Photobooth! Attached is your photo.\n\nBest regards,\nVirtual Photobooth`;
-        await sendEmail(req.session.email, emailSubject, emailText, imagePath); // Send email with user email
+        await sendEmail(req.session.email, emailSubject, emailText, imagePath);
 
         res.status(200).json({ message: 'Image uploaded and data saved successfully!', data: savedEmployee });
     } catch (error) {
