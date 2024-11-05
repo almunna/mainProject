@@ -18,7 +18,7 @@ app.use(cors({
     credentials: true // Allow cookies to be sent
 }));
 app.use(express.json()); // Parse JSON bodies
-app.use('/uploads', express.static('uploads')); // Serve static files from 'uploads' directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Configure session middleware
 // Session configuration in server.js
