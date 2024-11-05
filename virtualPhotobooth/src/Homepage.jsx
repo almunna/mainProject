@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './HomePage.css'; // Import CSS for styling
+import './Homepage.css'; // Import CSS for styling
 import logo2 from './assets/logo2.png'; // Import Logo 2
 import logo1 from './assets/logo1.png'; // Import Logo 1
 
