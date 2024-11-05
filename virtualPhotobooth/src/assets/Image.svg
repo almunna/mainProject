@@ -1,0 +1,11 @@
+<svg id="Image_btn" data-name="Image btn" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+  <path id="Path_1934" data-name="Path 1934" d="M60,0A60,60,0,1,1,0,60,60,60,0,0,1,60,0Z" fill="#125453" opacity="0.8"/>
+  <g id="image" transform="translate(35.204 35.204)">
+    <rect id="Rectangle_3126" data-name="Rectangle 3126" width="51" height="51" fill="#fff" opacity="0"/>
+    <g id="Icon_feather-image" data-name="Icon feather-image" transform="translate(3.821 3.821)">
+      <path id="Path_1929" data-name="Path 1929" d="M9.284,4.5H42.769a4.784,4.784,0,0,1,4.784,4.784V42.769a4.784,4.784,0,0,1-4.784,4.784H9.284A4.784,4.784,0,0,1,4.5,42.769V9.284A4.784,4.784,0,0,1,9.284,4.5Z" transform="translate(-4.5 -4.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+      <path id="Path_1930" data-name="Path 1930" d="M17.675,14.088A3.588,3.588,0,1,1,14.088,10.5,3.588,3.588,0,0,1,17.675,14.088Z" transform="translate(-0.933 -0.933)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+      <path id="Path_1931" data-name="Path 1931" d="M45.769,26.959,33.81,15,7.5,41.31" transform="translate(-2.716 1.743)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/>
+    </g>
+  </g>
+</svg>

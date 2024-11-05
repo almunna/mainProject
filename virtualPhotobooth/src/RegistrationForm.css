@@ -1,0 +1,74 @@
+/* RegistrationForm.css */
+
+.registration-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px 30px; /* Increased left and right padding */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    margin: auto;
+}
+
+.logo {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.form-label {
+    color: #00333b; /* Rich Brown for labels */
+    font-weight: 500;
+}
+
+.form-input {
+    width: 100%; /* Ensure all inputs take full width */
+    padding: 10px;
+    border: 1px solid #D4C7B4; /* Muted Beige for border */
+    border-radius: 5px;
+    background-color: #A5D6A7; /* Deeper Sage Green for inputs */
+    color: #2D2D23; /* Dark Gray for input text */
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s, box-shadow 0.3s; /* Transition for border and shadow */
+}
+
+.form-input:focus {
+    border-color: #7C7458; /* Olive Gray for focus */
+    box-shadow: 0 0 5px rgba(124, 116, 88, 0.5); /* Add a shadow effect */
+}
+.form-control.form-input{
+    background-color: #018aac;
+    width: 300px;
+
+}
+.form-control.form-input::placeholder {
+    color: rgb(219, 243, 229);
+}
+.form-select.form-input{
+    background-color: #018aac;
+    width: 300px;
+
+}
+
+.submit-button {
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #854628; /* Rich Brown for buttons */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s; /* Transition for background and scaling */
+}
+
+.submit-button:hover {
+    background-color: #7C7458; /* Olive Gray on hover */
+    transform: scale(1.05); /* Slightly enlarge button */
+}
+.btn.btn-primary{
+    background-color: #4bc46a;
+}

@@ -1,0 +1,73 @@
+/* HomePage.css */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to bottom, #d8f3fa, #00a4cc); /* Background gradient */
+    font-family: Arial, sans-serif;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #e0f7fa;
+    border-radius: 40px;
+    padding-top: 5px;
+    padding-bottom: 40px;
+    width: 90%;
+    max-height: 580px;
+    max-width: 400px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: #004481;
+}
+
+.logo {
+    width: 100px; 
+    height: auto;
+    
+}
+
+.logo1 {
+    width: 200px; /* Double size for Logo 1 */
+    
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #004481;
+    margin: -500px;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #0078aa;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 1rem;
+    color: #004481;
+    margin-bottom: 30px;
+}
+
+.start-button {
+    font-size: 1rem;
+    padding: 10px 20px;
+    background-color: #004481;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.start-button:hover {
+    background-color: #0078aa;
+}

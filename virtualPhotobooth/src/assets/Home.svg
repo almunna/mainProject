@@ -1,0 +1,7 @@
+<svg id="Home_btn" data-name="Home btn" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+  <path id="Path_1938" data-name="Path 1938" d="M60,0A60,60,0,1,1,0,60,60,60,0,0,1,60,0Z" fill="#125453" opacity="0.8"/>
+  <g id="Icon_akar-home-alt1" data-name="Icon akar-home-alt1" transform="translate(51.584 50.696)">
+    <path id="Path_1932" data-name="Path 1932" d="M43.615,42.639V26.678A9.913,9.913,0,0,0,40.91,19.8L27.052,5.444a4.088,4.088,0,0,0-5.987,0L7.205,19.8A9.913,9.913,0,0,0,4.5,26.678V42.639A4.557,4.557,0,0,0,8.846,47.38H39.269A4.557,4.557,0,0,0,43.615,42.639Z" transform="translate(-15.641 -16.457)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Path_1933" data-name="Path 1933" d="M13.5,23.427A4.227,4.227,0,0,1,17.974,19.5h4.474a4.227,4.227,0,0,1,4.474,3.927v11.78H13.5Z" transform="translate(-11.794 -4.283)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>
