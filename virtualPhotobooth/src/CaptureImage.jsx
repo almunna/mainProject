@@ -163,13 +163,13 @@ const CaptureImage = ({ userInfo }) => {
                     </div>
                 ) : (
                     <>
-                        <button onClick={handleRetake} className="action-button back-button">
+                        <button onClick={handleRetake}>
                             <img src={ReplaceIcon} alt="Replace" className='btnAction' /> {/* Replace icon */}
                         </button>
-                        <button onClick={handleUpload} className="action-button submit-button">
+                        <button onClick={handleUpload}>
                             <img src={SubmitIcon} alt="Submit" className='btnAction' /> {/* Submit icon */}
                         </button>
-                        <button onClick={handleSave} className="action-button save-button">
+                        <button onClick={handleSave}>
                             <img src={SaveIcon} alt="Save" className='btnAction' /> {/* Save icon */}
                         </button>
                     </>

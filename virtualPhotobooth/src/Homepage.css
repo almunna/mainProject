@@ -1,13 +1,11 @@
 /* HomePage.css */
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
     background: linear-gradient(to bottom, #d8f3fa, #00a4cc); /* Background gradient */
     font-family: Arial, sans-serif;
+    overflow-y: scroll; /* Force scrollbar to be visible at all times */
 }
 
 .home-container {
@@ -17,32 +15,32 @@ body {
     justify-content: center;
     background: #e0f7fa;
     border-radius: 40px;
-    padding-top: 5px;
-    padding-bottom: 40px;
+    padding: 20px;
     width: 90%;
-    max-height: 580px;
     max-width: 400px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     text-align: center;
     color: #004481;
+    margin: 20px auto; /* Center the container horizontally */
+    max-height: 100%;
 }
 
+/* Logo Styles */
 .logo {
-    width: 100px; 
+    width: 80px; 
     height: auto;
-    
 }
 
 .logo1 {
-    width: 200px; /* Double size for Logo 1 */
-    
+    width: 150px; /* Adjusted size for Logo 1 */
 }
 
+/* Title and Text */
 .title {
     font-size: 1.5rem;
     font-weight: bold;
     color: #004481;
-    margin: -500px;
+    margin-top: 20px;
 }
 
 .subtitle {
@@ -57,6 +55,7 @@ body {
     margin-bottom: 30px;
 }
 
+/* Start Button */
 .start-button {
     font-size: 1rem;
     padding: 10px 20px;
@@ -70,4 +69,65 @@ body {
 
 .start-button:hover {
     background-color: #0078aa;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .home-container {
+        max-width: 90%;
+        padding: 20px;
+    }
+    
+    .logo {
+        width: 70px;
+    }
+    
+    .logo1 {
+        width: 120px;
+    }
+    
+    .title {
+        font-size: 1.3rem;
+    }
+
+    .subtitle,
+    .description {
+        font-size: 0.9rem;
+    }
+
+    .start-button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-container {
+        width: 95%;
+        max-width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo {
+        width: 60px;
+    }
+
+    .logo1 {
+        width: 100px;
+    }
+
+    .title {
+        font-size: 1.2rem;
+    }
+
+    .subtitle,
+    .description {
+        font-size: 0.85rem;
+    }
+
+    .start-button {
+        font-size: 0.85rem;
+        padding: 6px 14px;
+    }
 }
