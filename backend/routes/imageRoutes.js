@@ -6,7 +6,7 @@ import nodemailer from 'nodemailer';
 import getEmployeeModel from '../utils/getEmployeeModel.js';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
-import sharp from 'sharp'; // Ensure sharp is imported
+
 
 dotenv.config();
 
