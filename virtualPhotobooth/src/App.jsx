@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import HomePage from './Homepage';
 import AgreementPage from './AgreementPage';
+import SuccessPage from './SuccessPage';
+
 
 function App() {
     const [userInfo, setUserInfo] = useState({ name: '', email: '', department: '' }); // Initialize userInfo
@@ -30,8 +32,9 @@ function App() {
                         <ProtectedRoute>
                             <CaptureImage userInfo={userInfo} />
                         </ProtectedRoute>
-                    } 
+                    }  
                 />
+                <Route path="/success" element={<SuccessPage />} />
                 {/* Add other routes as needed */}
             </Routes>
         </Router>

@@ -98,10 +98,7 @@ const CaptureImage = ({ userInfo }) => {
             });
 
             if (res.status === 200) {
-                setSuccessMessage('Image uploaded successfully! An email with your photo has been sent to you.');
-                setTimeout(() => {
-                    navigate('/register'); // Redirect to registration or another page
-                }, 2000);
+                navigate('/success');
             }
         } catch (error) {
             console.error('Image upload error:', error);
