@@ -7,6 +7,7 @@ import getEmployeeModel from '../utils/getEmployeeModel.js';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import AdmZip from 'adm-zip';
+import EmployeeModel from '../models/EmployeeModel.js';
 
 
 
@@ -23,7 +24,7 @@ const __dirname = dirname(__filename);
 router.get('/images-by-department', async (req, res) => {
     try {
         // Get the Image model specific to your application logic
-        const ImageModel = getEmployeeModel();
+        const ImageModel = EmployeeModel();
 
         // Fetch images grouped by department from the database
         const images = await ImageModel.aggregate([
