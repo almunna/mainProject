@@ -16,6 +16,7 @@ const router = express.Router();
 // Get current directory
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const uploadDir = path.join(__dirname, '..', 'uploads'); 
 
 router.get('/images-by-department', (req, res) => {
     fs.readdir(uploadDir, (err, departments) => {
