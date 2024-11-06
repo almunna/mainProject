@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url';
 import AdmZip from 'adm-zip';
 
 
+
 dotenv.config();
 
 const router = express.Router();
@@ -16,29 +17,35 @@ const router = express.Router();
 // Get current directory
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const uploadDir = path.join(__dirname, '..', 'uploads'); 
 
-router.get('/images-by-department', (req, res) => {
-    fs.readdir(uploadDir, (err, departments) => {
-        if (err) {
-            return res.status(500).json({ error: 'Failed to retrieve images' });
-        }
 
-        // Object to store department-wise images
-        const imagesByDepartment = {};
 
-        departments.forEach((department) => {
-            const departmentPath = path.join(uploadDir, department);
-            if (fs.statSync(departmentPath).isDirectory()) {
-                const images = fs.readdirSync(departmentPath).map((file) => {
-                    return `/uploads/${department}/${file}`;
-                });
-                imagesByDepartment[department] = images;
+router.get('/images-by-department', async (req, res) => {
+    try {
+        // Get the Image model specific to your application logic
+        const ImageModel = getImageModel();
+
+        // Fetch images grouped by department from the database
+        const images = await ImageModel.aggregate([
+            {
+                $group: {
+                    _id: '$department',
+                    images: { $push: '$imagePath' } // Assuming 'imagePath' is the field that stores the image path
+                }
             }
+        ]);
+
+        // Convert the results into a more usable format
+        const imagesByDepartment = {};
+        images.forEach(department => {
+            imagesByDepartment[department._id] = department.images;
         });
 
         res.json(imagesByDepartment);
-    });
+    } catch (err) {
+        console.error('Error fetching images:', err);
+        res.status(500).json({ error: 'Failed to retrieve images' });
+    }
 });
 
 router.get('/download-all', async (req, res) => {
