@@ -11,7 +11,7 @@ const ImagesByDepartment = () => {
     useEffect(() => {
         const fetchImages = async () => {
             try {
-                const response = await axios.get('https://virtual-photobooth1.onrender.com/api/images-by-department', {
+                const response = await axios.get('https://mainproject-glmp.onrender.com/api/images-by-department', {
                     withCredentials: true,
                 });
                 setImages(response.data);
@@ -34,7 +34,7 @@ const ImagesByDepartment = () => {
 
     // Function to download all images as a .zip file
     const downloadAllImages = () => {
-        window.location.href = 'https://virtual-photobooth1.onrender.com/api/download-all';
+        window.location.href = 'https://mainproject-glmp.onrender.com/api/download-all';
     };
 
     if (loading) {
