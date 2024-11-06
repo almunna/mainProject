@@ -23,7 +23,7 @@ const __dirname = dirname(__filename);
 router.get('/images-by-department', async (req, res) => {
     try {
         // Get the Image model specific to your application logic
-        const ImageModel = getImageModel();
+        const ImageModel = getEmployeeModel();
 
         // Fetch images grouped by department from the database
         const images = await ImageModel.aggregate([
