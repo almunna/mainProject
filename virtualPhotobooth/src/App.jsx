@@ -7,6 +7,7 @@ import './App.css';
 import HomePage from './Homepage';
 import AgreementPage from './AgreementPage';
 import SuccessPage from './SuccessPage';
+import ImagesByDepartment from './ImagesByDepartment';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                     path="/register" 
                     element={<Registration setUserInfo={setUserInfo} />} 
                 />
+                <Route path="/images" element={<ImagesByDepartment />} />
                 <Route 
                     path="/capture-image" 
                     element={

@@ -1,0 +1,104 @@
+.file-explorer-container {
+    width: 100vw; /* Full viewport width */
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    font-family: Arial, sans-serif;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #f7f7f7;
+    overflow-x: auto;
+}
+
+.header-row, .file-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 0.5fr; /* Define column widths for Name, Date Modified, Type, Actions */
+    align-items: center;
+    padding: 12px 16px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.header-row {
+    font-weight: bold;
+    background-color: #c5c5c5;
+    color: #333;
+    border-top: 1px solid #ddd;
+    border-bottom: 2px solid #b5b5b5;
+    font-size: 1rem;
+}
+
+.department-header {
+    padding: 10px 16px;
+    background-color: #eaeaea;
+    font-weight: bold;
+    border-top: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.department-header:hover {
+    background-color: #dcdcdc;
+}
+
+.department-images {
+    padding-left: 5px; /* Adjust this padding if needed */
+}
+
+.file-row:hover {
+    background-color: #f1f1f1;
+}
+
+.header-cell, .file-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+}
+
+/* Ensure each column has consistent width */
+.header-cell:first-child,
+.file-cell:first-child {
+    grid-column: span 1;
+}
+
+.dropdown-button {
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-button:focus {
+    outline: none;
+}
+
+.btnSave {
+    border: none;
+    background-color:#999393; /* Green background for a more prominent look */
+    color: white;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    min-width: 100px;
+    text-align: center;
+    margin-top: 2px;
+    width: 130px;
+}
+
+.btnSave:hover {
+    background-color: #503e3e; /* Slightly darker green on hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
+}

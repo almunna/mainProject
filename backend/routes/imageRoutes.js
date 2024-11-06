@@ -6,6 +6,7 @@ import nodemailer from 'nodemailer';
 import getEmployeeModel from '../utils/getEmployeeModel.js';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
+import AdmZip from 'adm-zip';
 
 
 dotenv.config();
@@ -15,6 +16,64 @@ const router = express.Router();
 // Get current directory
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+router.get('/images-by-department', (req, res) => {
+    fs.readdir(uploadDir, (err, departments) => {
+        if (err) {
+            return res.status(500).json({ error: 'Failed to retrieve images' });
+        }
+
+        // Object to store department-wise images
+        const imagesByDepartment = {};
+
+        departments.forEach((department) => {
+            const departmentPath = path.join(uploadDir, department);
+            if (fs.statSync(departmentPath).isDirectory()) {
+                const images = fs.readdirSync(departmentPath).map((file) => {
+                    return `/uploads/${department}/${file}`;
+                });
+                imagesByDepartment[department] = images;
+            }
+        });
+
+        res.json(imagesByDepartment);
+    });
+});
+
+router.get('/download-all', async (req, res) => {
+    try {
+        const zip = new AdmZip();
+        
+        // Loop through each department folder and add files to the zip archive
+        fs.readdirSync(uploadDir).forEach((department) => {
+            const departmentPath = path.join(uploadDir, department);
+            if (fs.statSync(departmentPath).isDirectory()) {
+                // Add each file in the department directory to the zip
+                const departmentFiles = fs.readdirSync(departmentPath);
+                departmentFiles.forEach((file) => {
+                    const filePath = path.join(departmentPath, file);
+                    zip.addLocalFile(filePath, department); // Add files to department folder in zip
+                });
+            }
+        });
+
+        // Define the zip file name
+        const zipFileName = 'all_departments_images.zip';
+
+        // Send the zip file as a response
+        const zipBuffer = zip.toBuffer();
+        res.set({
+            'Content-Type': 'application/zip',
+            'Content-Disposition': `attachment; filename=${zipFileName}`,
+            'Content-Length': zipBuffer.length,
+        });
+        res.send(zipBuffer);
+
+    } catch (error) {
+        console.error('Error creating zip file:', error);
+        res.status(500).send('Failed to create zip file');
+    }
+});
 
 // Set up multer storage for image uploads with department-based folder structure
 const storage = multer.diskStorage({
