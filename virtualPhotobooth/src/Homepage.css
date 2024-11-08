@@ -1,7 +1,4 @@
-/* HomePage.css */
-
 body {
-    min-height: 100vh;
     margin: 0;
     background: linear-gradient(to bottom, #d8f3fa, #00a4cc); /* Background gradient */
     font-family: Arial, sans-serif;
@@ -27,12 +24,16 @@ body {
 
 /* Logo Styles */
 .logo {
-    width: 80px; 
-    height: auto;
+    width: 100px;
+    margin-bottom: 10px;
 }
 
+
 .logo1 {
-    width: 150px; /* Adjusted size for Logo 1 */
+    width: 30%; /* Set the width to a smaller value */
+    max-width: 80%; /* Prevent it from exceeding the container's width */
+    height: 30%; /* Maintain the aspect ratio */
+    margin-bottom: 20px;
 }
 
 /* Title and Text */
@@ -83,7 +84,7 @@ body {
     }
     
     .logo1 {
-        width: 120px;
+        width: 90px; /* Adjusted size for Logo 1 */
     }
     
     .title {
@@ -114,7 +115,8 @@ body {
     }
 
     .logo1 {
-        width: 100px;
+        width: 80px; /* Further reduced size for smaller screens */
+        height: auto;
     }
 
     .title {
@@ -129,5 +131,26 @@ body {
     .start-button {
         font-size: 0.85rem;
         padding: 6px 14px;
+    }
+}
+
+/* Additional media query for very small devices or portrait orientation */
+@media (max-width: 320px) {
+    .home-container {
+        padding: 10px; /* Further reduce padding for very small devices */
+    }
+
+    .title {
+        font-size: 1.1rem;
+    }
+
+    .subtitle,
+    .description {
+        font-size: 0.75rem;
+    }
+
+    .start-button {
+        font-size: 0.8rem;
+        padding: 5px 12px; /* Adjust button size */
     }
 }

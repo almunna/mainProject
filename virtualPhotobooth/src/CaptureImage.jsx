@@ -6,7 +6,7 @@ import './CaptureImage.css';
 import overlayImage from './assets/overlay.png'; // Ensure this path is correct
 import CaptureIcon from './assets/Capture.png'; // Import Capture icon
 import ReplaceIcon from './assets/Retake.png'; // Import Replace icon
-import SaveIcon from './assets/Save.svg'; // Import Save icon
+import SaveIcon from './assets/Save.png'; // Import Save icon
 import SubmitIcon from './assets/Submit.png'; // Import Submit icon
 import BackButton from './assets/Back.png'; // Import Back button icon
 import logo2 from './assets/logo2.png'; // Import logo2
@@ -154,19 +154,19 @@ const CaptureImage = ({ userInfo }) => {
                         <button onClick={handleBack} className="action-button back-button">
                             <img src={BackButton} alt="Back" className='btnAction' />
                         </button>
-                        <button onClick={captureImage} className="action-button capture-button">
+                        <button onClick={captureImage} className="action-button">
                             <img src={CaptureIcon} alt="Capture" className='btnAction' /> 
                         </button>
                     </div>
                 ) : (
                     <>
-                        <button onClick={handleRetake}>
+                        <button onClick={handleRetake} className="action-button">
                             <img src={ReplaceIcon} alt="Replace" className='btnAction' /> {/* Replace icon */}
                         </button>
-                        <button onClick={handleUpload}>
+                        <button onClick={handleUpload} className="action-button">
                             <img src={SubmitIcon} alt="Submit" className='btnAction' /> {/* Submit icon */}
                         </button>
-                        <button onClick={handleSave}>
+                        <button onClick={handleSave} className="action-button">
                             <img src={SaveIcon} alt="Save" className='btnAction' /> {/* Save icon */}
                         </button>
                     </>

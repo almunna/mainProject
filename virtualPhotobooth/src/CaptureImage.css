@@ -74,15 +74,6 @@
     pointer-events: none; /* Prevents the overlay from blocking interactions */
 }
 
-.success-message {
-    margin-top: 15px;
-    padding: 10px;
-    background-color: #28a745;
-    color: #fff;
-    border-radius: 5px;
-    font-size: 0.9rem;
-}
-
 .button-container {
     display: flex;
     justify-content: center;
@@ -100,26 +91,21 @@
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    transition: background-color 0.3s;
-    color: #ffffff;
-    z-index: 0;
+   
 }
 .btnAction{
+    font-size: 1.5rem;
     width: 40px;
     height: 40px;
-    z-index: 30;
-}
-.capture-button {
-    background-color: #007bff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: rgb(32, 38, 48);
+    border-radius: 100%;
+
 }
 
-.back-button {
-    background-color: #ffc107;
-}
-
-.submit-button {
-    background-color: #28a745;
-}
 
 .action-button:hover {
     opacity: 0.8;
