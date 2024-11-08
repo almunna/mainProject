@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ImagesByDepartment.css';
 
-
 const ImagesByDepartment = () => {
     const [images, setImages] = useState({});
     const [loading, setLoading] = useState(true);
@@ -11,7 +10,7 @@ const ImagesByDepartment = () => {
     useEffect(() => {
         const fetchImages = async () => {
             try {
-                const response = await axios.get('https://mainproject-glmp.onrender.com/api/images-by-department', {
+                const response = await axios.get('http://localhost:8000/api/images-by-department', {
                     withCredentials: true,
                 });
                 setImages(response.data);
@@ -34,7 +33,7 @@ const ImagesByDepartment = () => {
 
     // Function to download all images as a .zip file
     const downloadAllImages = () => {
-        window.location.href = 'https://mainproject-glmp.onrender.com/api/download-all';
+        window.location.href = 'http://localhost:8000/api/download-all';
     };
 
     if (loading) {
@@ -61,14 +60,30 @@ const ImagesByDepartment = () => {
                     </div>
                     {expandedDepartments[department] && (
                         <div className="department-images">
-                            {images[department].map((image, index) => (
-                                <div key={index} className="file-row">
-                                    <span className="file-cell">{image.split('/').pop()}</span>
-                                    <span className="file-cell">{new Date().toLocaleDateString()}</span>
-                                    <span className="file-cell">Image File</span>
-                                  
-                                </div>
-                            ))}
+                            {images[department].map((image, index) => {
+                                // Destructure image data
+                                const fileName = image.fileName || 'Unknown File';
+                                const extension = image.extension || 'Unknown'; // Extension, if available
+                                const registeredName = image.registeredName || 'Unknown Registered Name'; // Registered name without extension
+
+                                return (
+                                    <div key={index} className="file-row">
+                                        {/* Display the file name */}
+                                        <span className="file-cell">{fileName}</span>
+                                        {/* You can also display `registeredName` if needed */}
+                                        <span className="file-cell">{new Date().toLocaleDateString()}</span>
+                                        <span className="file-cell">{extension.toUpperCase()}</span>
+                                        <div className="file-cell">
+                                            <button
+                                                className="dropdown-button"
+                                                onClick={() => window.open(image.url, "_blank")}
+                                            >
+                                                View
+                                            </button>
+                                        </div>
+                                    </div>
+                                );
+                            })}
                         </div>
                     )}
                 </div>

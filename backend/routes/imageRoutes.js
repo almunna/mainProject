@@ -7,7 +7,6 @@ import getEmployeeModel from '../utils/getEmployeeModel.js';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import AdmZip from 'adm-zip';
-import EmployeeModel from '../models/EmployeeModel.js';
 
 
 
@@ -19,35 +18,9 @@ const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const uploadDir = path.join(__dirname, '..', 'uploads');
 
 
-router.get('/images-by-department', async (req, res) => {
-    try {
-        // Get the Image model specific to your application logic
-        const ImageModel = EmployeeModel();
-
-        // Fetch images grouped by department from the database
-        const images = await ImageModel.aggregate([
-            {
-                $group: {
-                    _id: '$department',
-                    images: { $push: '$imagePath' } // Assuming 'imagePath' is the field that stores the image path
-                }
-            }
-        ]);
-
-        // Convert the results into a more usable format
-        const imagesByDepartment = {};
-        images.forEach(department => {
-            imagesByDepartment[department._id] = department.images;
-        });
-
-        res.json(imagesByDepartment);
-    } catch (err) {
-        console.error('Error fetching images:', err);
-        res.status(500).json({ error: 'Failed to retrieve images' });
-    }
-});
 
 router.get('/download-all', async (req, res) => {
     try {
@@ -109,11 +82,45 @@ const storage = multer.diskStorage({
         }
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Use original filename or create a unique one
+        const nameFromSession = req.session.name.replace(/\s+/g, '_');
+        const extension = path.extname(file.originalname);
+        const imageName = `${nameFromSession}${extension}`;
+        cb(null, imageName);
     },
+    
 });
 
 const upload = multer({ storage });
+router.get('/images-by-department', (req, res) => {
+    try {
+        const departments = fs.readdirSync(uploadDir).filter((item) => fs.statSync(path.join(uploadDir, item)).isDirectory());
+        const imagesByDepartment = {};
+
+        departments.forEach((department) => {
+            const departmentPath = path.join(uploadDir, department);
+            const files = fs.readdirSync(departmentPath).filter((file) => fs.statSync(path.join(departmentPath, file)).isFile());
+        
+            imagesByDepartment[department] = files.map((file) => {
+                const fileName = path.basename(file).toString(); 
+                const nameWithoutExtension = fileName.split('_').slice(0, -1).join('.'); // File name without extension
+                const extension = fileName.split('_').pop(); // Get the extension if needed
+        
+                return {
+                    fileName: fileName,
+                    registeredName: nameWithoutExtension, // Just the name without extension
+                    extension: extension // Optional: the file extension
+                };
+            });
+        });
+        
+
+        console.log("Sending imagesByDepartment response:", imagesByDepartment); // Log response structure
+        res.json(imagesByDepartment);
+    } catch (err) {
+        console.error('Error fetching images:', err);
+        res.status(500).json({ error: 'Failed to retrieve images' });
+    }
+});
 
 // Middleware to check session for registration data
 const ensureRegistrationData = (req, res, next) => {

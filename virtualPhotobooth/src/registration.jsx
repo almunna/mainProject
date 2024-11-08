@@ -36,7 +36,7 @@ const Registration = ({ setUserInfo }) => {
         setErrorMessage('');
 
         try {
-            const response = await axios.post('https://mainproject-glmp.onrender.com/api/register', {
+            const response = await axios.post('http://localhost:8000/api/register', {
                 name,
                 email,
                 department,
